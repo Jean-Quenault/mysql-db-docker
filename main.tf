@@ -38,9 +38,10 @@ sudo yum install -y git
 sudo service docker start
 sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-git clone https://github.com/Jean-Quenault/docker-init
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0c877eee92397ec69.efs.eu-west-3.amazonaws.com:/ docker-init
+git clone https://github.com/Jean-Quenault/docker-init home/ec2-user/docker-init
 cd docker-init/
+sudo docker-compose -f docker-compose.yml up -d
 EOF
                         )
   tags = {
