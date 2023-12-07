@@ -30,7 +30,7 @@ resource "aws_instance" "instance_docker" {
   ami           = "ami-0c95ddc49a2ac351f"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.instance_docker.name]
-  user_data = <<-EOF
+  user_data = base64encode(<<EOF
 #!/bin/bash
 sudo yum update
 sudo yum install docker -y
@@ -44,7 +44,7 @@ sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,ret
 cd docker-init/
 sudo docker-compose up -d
               EOF
-
+    )
   tags = {
     Name = "instance_docker"
   }
